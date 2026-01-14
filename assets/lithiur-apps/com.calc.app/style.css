@@ -1,17 +1,13 @@
 body {
     font-family: Arial, sans-serif;
     background: #111;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .calculator {
     background: #222;
     padding: 20px;
     border-radius: 15px;
-    width: 300px;
+    width: 100vw;
 }
 
 .display {
