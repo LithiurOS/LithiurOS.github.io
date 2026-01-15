@@ -1,0 +1,20 @@
+.btndis {
+  background: darkred;
+  color: white;
+  cursor: not-allowed;
+}
+.btnena {
+  color: white;
+}
+.checkboxen {
+  background: green;
+}
+.checkboxdis {
+  background: red;
+}
+.inputhover {
+  background: grey;
+}
+.inputleavehover {
+  /* set defaults hover */
+}
