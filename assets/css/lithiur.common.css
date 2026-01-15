@@ -18,3 +18,13 @@
 .inputleavehover {
   /* set defaults hover */
 }
+.suspicious {
+  background: red;
+  color: white;
+}
+.promptbg {
+  background: #424242;
+}
+.promptcontainer {
+  background: white;
+}
