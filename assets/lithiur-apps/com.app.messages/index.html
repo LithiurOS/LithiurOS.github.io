@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages + Contacts</title>
 
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* CONTACTS */
+        .contacts {
+            width: 30%;
+            background: #1a1a1a;
+            border-right: 2px solid #222;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .contact {
+            background: #222;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .contact:hover {
+            background: #333;
+        }
+
+        /* CHAT */
+        .chat-area {
+            width: 70%;
+            padding: 20px;
+            position: relative;
+        }
+
+        #chatTitle {
+            margin-top: 0;
+        }
+
+        .messages-container {
+            height: calc(100vh - 160px);
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .message {
+            background: #222;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .message.you {
+            background: #0044aa;
+        }
+
+        .input-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-bar input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #333;
+            color: #fff;
+        }
+
+        .input-bar button {
+            background: #0078ff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- CONTACT LIST -->
+    <div class="contacts">
+        <h2>Contacts</h2>
+        <div id="contactList"></div>
+    </div>
+
+    <!-- CHAT AREA -->
+    <div class="chat-area">
+        <h2 id="chatTitle">Select a Contact</h2>
+        <div class="messages-container" id="messages"></div>
+
+        <div class="input-bar">
+            <input id="msgInput" type="text" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // CONTACT LIST
+    const contactNames = ["Alex", "Jordan", "Luna", "Marcus"];
+    let currentContact = null;
+
+    const contactList = document.getElementById("contactList");
+    const chatTitle = document.getElementById("chatTitle");
+    const messages = document.getElementById("messages");
+    const msgInput = document.getElementById("msgInput");
+
+
+    // COOKIE FUNCTIONS
+    function setCookie(name, value) {
+        document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=31536000`;
+    }
+
+    function getCookie(name) {
+        const items = document.cookie.split("; ");
+        for (let c of items) {
+            const [key, val] = c.split("=");
+            if (key === name) return decodeURIComponent(val);
+        }
+        return "";
+    }
+
+
+    // LOAD CONTACTS
+    function loadContacts() {
+        contactList.innerHTML = "";
+        contactNames.forEach(name => {
+            const div = document.createElement("div");
+            div.className = "contact";
+            div.textContent = name;
+            div.onclick = () => openChat(name);
+            contactList.appendChild(div);
+        });
+    }
+    loadContacts();
+
+
+    // OPEN CHAT
+    function openChat(name) {
+        currentContact = name;
+        chatTitle.textContent = name;
+        loadMessages();
+    }
+
+
+    // SEND MESSAGE
+    function sendMessage() {
+        if (!currentContact) return;
+
+        const text = msgInput.value.trim();
+        if (!text) return;
+
+        addMessage("You", text, "you");
+        msgInput.value = "";
+        saveMessages();
+    }
+
+
+    // DISPLAY MESSAGE
+    function addMessage(author, text, cls = "") {
+        const msg = document.createElement("div");
+        msg.className = `message ${cls}`;
+        msg.innerHTML = `<strong>${author}:</strong><br>${text}`;
+        messages.appendChild(msg);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+
+    // SAVE MESSAGES TO COOKIE
+    function saveMessages() {
+        const arr = [];
+        document.querySelectorAll(".message").forEach(m => {
+            arr.push({
+                author: m.classList.contains("you") ? "You" : currentContact,
+                text: m.innerText.split(":")[1].trim()
+            });
+        });
+        setCookie("chat_" + currentContact, JSON.stringify(arr));
+    }
+
+
+    // LOAD MESSAGES FROM COOKIE
+    function loadMessages() {
+        messages.innerHTML = "";
+
+        const raw = getCookie("chat_" + currentContact);
+        if (!raw) return;
+
+        const arr = JSON.parse(raw);
+        arr.forEach(m => {
+            addMessage(m.author, m.text, m.author === "You" ? "you" : "");
+        });
+    }
+</script>
+
+</body>
+</html>
