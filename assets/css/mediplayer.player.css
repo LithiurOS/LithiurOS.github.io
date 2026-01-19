@@ -1,20 +1,206 @@
+/* --------------------------------------------------
+   VIDEO & AUDIO CONTAINERS
+-------------------------------------------------- */
 .mp4container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
 }
+
 .mp3container {
-
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    background: #222;
+    border-radius: 10px;
+    color: white;
 }
-.mediaplyercontroller {
 
+/* --------------------------------------------------
+   MEDIA PLAYER CONTROLLER BAR
+-------------------------------------------------- */
+.mediaplayercontroller {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    transition: opacity 0.25s ease;
 }
+
+.mediaplayercontroller.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --------------------------------------------------
+   MINI / BIG BARS (USER CLASSES)
+-------------------------------------------------- */
 .barmini {
-  color: white;
-  border-radius: 4px;
-  width: 100px;
-  height: 20px;
+    color: white;
+    border-radius: 4px;
+    width: 100px;
+    height: 20px;
+    background: rgba(255,255,255,0.2);
 }
+
 .barbig {
-  color: white;
-  border-radius: 4px;
-  width: 100vw;
-  height: 50px;
+    color: white;
+    border-radius: 4px;
+    width: 100vw;
+    height: 50px;
+    background: rgba(255,255,255,0.2);
+}
+
+/* --------------------------------------------------
+   CONTROLLER BUTTONS
+-------------------------------------------------- */
+.control-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 6px;
+    transition: 0.2s ease;
+}
+
+.control-btn:hover {
+    color: #00aaff;
+    transform: scale(1.2);
+}
+
+.control-btn:active {
+    transform: scale(0.9);
+}
+
+/* --------------------------------------------------
+   PROGRESS BAR
+-------------------------------------------------- */
+.progress-container {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    margin: 0 10px;
+}
+
+.progress-filled {
+    height: 100%;
+    width: 0%;
+    background: #00aaff;
+    border-radius: 4px;
+    transition: width 0.1s linear;
+}
+
+.progress-buffered {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: rgba(255,255,255,0.4);
+    border-radius: 4px;
+}
+
+/* --------------------------------------------------
+   VOLUME CONTROL
+-------------------------------------------------- */
+.volume-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    appearance: none;
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+    outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* --------------------------------------------------
+   TIMECODE
+-------------------------------------------------- */
+.time-display {
+    font-size: 12px;
+    color: white;
+    user-select: none;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* --------------------------------------------------
+   FULLSCREEN BUTTON
+-------------------------------------------------- */
+.fullscreen-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    padding: 6px;
+}
+
+.fullscreen-btn:hover {
+    color: #00aaff;
+}
+
+/* --------------------------------------------------
+   HOVER FADE FOR CONTROLS
+-------------------------------------------------- */
+.mp4container:hover .mediaplayercontroller {
+    opacity: 1;
+}
+
+/* --------------------------------------------------
+   AUDIO-ONLY PLAYER DESIGN
+-------------------------------------------------- */
+.audio-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* --------------------------------------------------
+   RESPONSIVE MODE
+-------------------------------------------------- */
+@media (max-width: 600px) {
+    .mediaplayercontroller {
+        flex-direction: column;
+        height: 100px;
+        padding: 10px;
+    }
+    
+    .volume-area {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .progress-container {
+        width: 100%;
+        margin: 8px 0;
+    }
 }
