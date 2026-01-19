@@ -1,3 +1,161 @@
+/* --------------------------------------------------
+   RESET & DEFAULTS
+-------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  color: #222;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------
+   DISPLAY / LAYOUT
+-------------------------------------------------- */
+.hidden { display: none !important; }
+.block { display: block; }
+.inline { display: inline-block; }
+.flex { display: flex; }
+.grid { display: grid; }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-column { flex-direction: column; }
+.wrap { flex-wrap: wrap; }
+
+.w100 { width: 100%; }
+.h100 { height: 100%; }
+
+.maxw-300 { max-width: 300px; }
+.maxw-600 { max-width: 600px; }
+.maxw-1200 { max-width: 1200px; }
+
+/* --------------------------------------------------
+   SPACING
+-------------------------------------------------- */
+.m0 { margin: 0; }
+.mt10 { margin-top: 10px; }
+.mb10 { margin-bottom: 10px; }
+.ml10 { margin-left: 10px; }
+.mr10 { margin-right: 10px; }
+.mt20 { margin-top: 20px; }
+
+.p0 { padding: 0; }
+.p10 { padding: 10px; }
+.p20 { padding: 20px; }
+
+/* --------------------------------------------------
+   TEXT / FONTS
+-------------------------------------------------- */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.upper { text-transform: uppercase; }
+.small { font-size: 0.8em; }
+.large { font-size: 1.4em; }
+
+/* Colors */
+.text-red { color: red; }
+.text-green { color: green; }
+.text-blue { color: dodgerblue; }
+.text-grey { color: grey; }
+
+/* --------------------------------------------------
+   COLORS / BACKGROUNDS
+-------------------------------------------------- */
+.bg-white { background: white; }
+.bg-black { background: black; color: white; }
+.bg-red { background: red; color: white; }
+.bg-green { background: green; color: white; }
+.bg-blue { background: dodgerblue; color: white; }
+.bg-yellow { background: yellow; }
+
+/* --------------------------------------------------
+   BORDERS / RADIUS
+-------------------------------------------------- */
+.rounded { border-radius: 8px; }
+.rounded-full { border-radius: 999px; }
+
+.border { border: 1px solid #ccc; }
+.border-red { border: 1px solid red; }
+.border-green { border: 1px solid green; }
+.border-blue { border: 1px solid dodgerblue; }
+
+/* --------------------------------------------------
+   SHADOWS
+-------------------------------------------------- */
+.shadow { box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+.shadow-lg { box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+
+/* --------------------------------------------------
+   ANIMATIONS
+-------------------------------------------------- */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hover-zoom:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease;
+}
+
+/* --------------------------------------------------
+   BUTTONS
+-------------------------------------------------- */
+.btn {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: dodgerblue;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #005bbb;
+}
+
+.btn-danger {
+  background: red;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: darkred;
+}
+
+.btn-disabled {
+  background: #888;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Extra from user */
 .btndis {
   background: darkred;
   color: white;
@@ -6,36 +164,124 @@
 .btnena {
   color: white;
 }
+
+/* --------------------------------------------------
+   INPUT FIELDS
+-------------------------------------------------- */
+.input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.input:focus {
+  border-color: dodgerblue;
+  outline: none;
+}
+
+.input-error {
+  border-color: red;
+}
+
+.inputhover:hover {
+  background: grey;
+}
+
+/* --------------------------------------------------
+   CHECKBOXES & STATES
+-------------------------------------------------- */
 .checkboxen {
   background: green;
 }
+
 .checkboxdis {
   background: red;
 }
-.inputhover {
-  background: grey;
-}
-.inputleavehover {
-  /* set defaults hover */
-}
+
 .suspicious {
   background: red;
   color: white;
 }
-.promptbg {
-  background: #424242;
-}
-.promptcontainer {
+
+/* --------------------------------------------------
+   CARDS
+-------------------------------------------------- */
+.card {
   background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
-.prompttext {
-  color: white;
+
+.card-header {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
-.promptcancel {
-  background: red;
-  color: white;
+
+.card-footer {
+  margin-top: 10px;
+  text-align: right;
 }
-.promptapprove {
-  background: green;
-  color: white;
+
+/* --------------------------------------------------
+   MODALS / PROMPTS
+-------------------------------------------------- */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  margin: 100px auto;
+}
+
+/* user prompt classes */
+.promptbg { background: #424242; }
+.promptcontainer { background: white; }
+.prompttext { color: white; }
+.promptcancel { background: red; color: white; }
+.promptapprove { background: green; color: white; }
+
+/* --------------------------------------------------
+   SCROLLBAR CUSTOM
+-------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* --------------------------------------------------
+   RESPONSIVE HELPERS
+-------------------------------------------------- */
+@media (max-width: 900px) {
+  .hide-md { display: none; }
+}
+
+@media (max-width: 600px) {
+  .hide-sm { display: none; }
+  .text-center-sm { text-align: center; }
 }
