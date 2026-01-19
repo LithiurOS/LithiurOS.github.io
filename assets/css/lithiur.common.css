@@ -29,5 +29,13 @@
   background: white;
 }
 .prompttext {
-  color: white:
+  color: white;
+}
+.promptcancel {
+  background: red;
+  color: white;
+}
+.promptapprove {
+  background: green;
+  color: white;
 }
